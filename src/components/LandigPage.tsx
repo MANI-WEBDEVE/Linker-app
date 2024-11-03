@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
@@ -13,9 +12,14 @@ const LandigPage = () => {
         <p className="text-white text-xl font-semibold mt-8 w-[70%]">
           Our Servise is free and most straightforward URL shortner in the world
         </p>
-        <StyledWrapper>
-      <button>Button</button>
-    </StyledWrapper>
+        <div className="flex items-center">
+          <StyledWrapper>
+            <button>Get Started</button>
+          </StyledWrapper>
+          <StyledWrapper>
+            <button>GitHub</button>
+          </StyledWrapper>
+        </div>
       </div>
       <div className=" flex justify-end items-start mt-10  w-full">
         <Image src={"/vector.png"} alt="vector" height={200} width={500} />
@@ -27,11 +31,11 @@ const LandigPage = () => {
 export default LandigPage;
 
 const StyledWrapper = styled.div`
-    button {
-    --color: #10B981;  /* Changed to emerald-500 to match gradient */
+  button {
+    --color: #10b981; /* Changed to emerald-500 to match gradient */
     font-family: inherit;
     display: inline-block;
-    width: 6em;
+    width: 8em;
     height: 2.6em;
     line-height: 2.5em;
     overflow: hidden;
@@ -43,12 +47,17 @@ const StyledWrapper = styled.div`
     border: 2px solid var(--color);
     border-radius: 6px;
     position: relative;
+    padding: 
   }
 
   button::before {
     position: absolute;
     content: "";
-    background: linear-gradient(to right, #047857, #1e293b); /* Match heading gradient */
+    background: linear-gradient(
+      to right,
+      #047857,
+      #1e293b
+    ); /* Match heading gradient */
     width: 150px;
     height: 200px;
     z-index: -1;
@@ -66,7 +75,7 @@ const StyledWrapper = styled.div`
   }
 
   button:hover::before {
-    top: -30px;
-    left: -30px;
+    top: -50px;
+    left: -10px;
   }
 `;
