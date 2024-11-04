@@ -1,13 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
 import clientPromise from "../../../../lib/dbConnect";
 
+interface URLS {
+    url: string;
+    shortUrl: string;
+}
 
-export const POST = async (request:NextRequest, response:NextResponse) => {
+interface APIResponse {
+    message: string;
+    status: number;
+}
 
-    const client = await clientPromise
-    const db = client.db("Linker-app-shortner-url")
-    const collection = db.collection("url")
+export const POST = async (request: NextRequest): Promise<NextResponse<APIResponse>> => {
+    const body: URLS = await request.json();
+
+    const client = await clientPromise;
+
+    const db = client.db("Linker-app-shortner-url");
+    const collection = db.collection("url");
+
+    // check the url already exist in the DataBase if exist return error 
+
+    const urlAlready = await collection.findOne({shortUrl: body.shortUrl})
+     if (urlAlready) {
+        return NextResponse.json({
+            message: "url Already exist ",
+            status: 404,
+            error:true,
+            success:false
+        });
+     }
 
 
-    return NextResponse.json({message: "hello working",status: 200})
+    const result = await collection.insertOne({
+        url: body.url,
+        shortUrl: body.shortUrl
+    });
+
+    return NextResponse.json({
+        message: "url generated Successfully",
+        status: 200,
+        success:true,
+        error:false
+    });
 }

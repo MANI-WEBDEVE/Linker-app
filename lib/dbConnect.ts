@@ -22,11 +22,16 @@ if (process.env.NODE_ENV === "development") {
   if (!global._mongoClientPromise) {
     client = new MongoClient(uri!); // Add non-null assertion since we check above
     global._mongoClientPromise = client.connect();
+    console.log("connect Su")
   }
   clientPromise = global._mongoClientPromise;
+  console.log("connect Su1")
+
 } else {
   client = new MongoClient(uri!);
   clientPromise = client.connect();
+  console.log("connect Su2")
+
 }
 
 export default clientPromise;

@@ -2,14 +2,28 @@
 import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import { StyledWrapper } from "@/components/LandigPage";
-
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 const page = () => {
   const [url, seturl] = useState<string>("");
   const [shortUrl, setShortUrl] = useState<string>("");
   const [generated, setGenerated] = useState<boolean>(false);
 
-  console.log(url);
-  console.log(shortUrl);
+  const generateFunction = async () => {
+    try {
+      const response = await axios.post("/api/generate", {
+        url,
+        shortUrl,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const toastEvent = () => {
+    toast("hello")
+  }
 
   return (
     <>
@@ -44,10 +58,15 @@ const page = () => {
                 fontSize: "17px",
               }}
               className="rounded-2xl"
+              onClick={generateFunction}
             >
               Generate
             </button>
           </StyledWrapper>
+        
+            <button onClick={toastEvent}> Generate</button>
+            <ToastContainer/>
+       
         </div>
       </div>
     </>
