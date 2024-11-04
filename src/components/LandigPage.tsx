@@ -30,7 +30,7 @@ const LandigPage = () => {
 
 export default LandigPage;
 
-const StyledWrapper = styled.div`
+export const StyledWrapper = styled.div`
   button {
     --color: #10b981; /* Changed to emerald-500 to match gradient */
     font-family: inherit;
@@ -40,7 +40,6 @@ const StyledWrapper = styled.div`
     line-height: 2.5em;
     overflow: hidden;
     cursor: pointer;
-    margin: 20px;
     font-size: 17px;
     z-index: 1;
     color: var(--color);
