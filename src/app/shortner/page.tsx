@@ -20,11 +20,6 @@ const page = () => {
       console.log(error);
     }
   };
-
-  const toastEvent = () => {
-    toast("hello")
-  }
-
   return (
     <>
       <div className="w-full h-screen ">
@@ -64,8 +59,7 @@ const page = () => {
             </button>
           </StyledWrapper>
         
-            <button onClick={toastEvent}> Generate</button>
-            <ToastContainer/>
+            
        
         </div>
       </div>
