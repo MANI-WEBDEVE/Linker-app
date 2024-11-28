@@ -1,13 +1,13 @@
 "use client";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { StyledWrapper } from "@/components/LandigPage";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+// import { toast, ToastContainer } from "react-toastify";
 const page = () => {
   const [url, seturl] = useState<string>("");
   const [shortUrl, setShortUrl] = useState<string>("");
-  const [generated, setGenerated] = useState<string>("");
+  const [generated, setGenerated] = useState<string[]>([]);
 
   const generateFunction = async () => {
     try {
@@ -15,14 +15,13 @@ const page = () => {
         url,
         shortUrl,
       });
-      
-      if(response.data.status === 200){
-        seturl("")
-        setShortUrl("")
-        toast.success("URL Generated Successfully")
-      }
-     
 
+      if (response.data.status === 200) {
+        seturl("");
+        setShortUrl("");
+        alert(response.data.message);
+        setGenerated([...generated, shortUrl]);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -65,10 +64,25 @@ const page = () => {
               Generate
             </button>
           </StyledWrapper>
-        
-            
-       
         </div>
+        {generated && (
+          <>
+            <div className="flex items-center justify-center w-full px-10 py-3 mx-auto ">
+              <span className="text-2xl font-bold text-white">Your Links</span>
+            </div>
+            <div className="w-full flex items-center flex-col gap-2">
+              <code className="text-white text-xl font-semibold mt-2">
+                {generated.map((item, index) => (
+                  <li key={index}>
+                    <a href={item} target="_blank" rel="noopener noreferrer">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </code>
+            </div>
+          </>
+        )}
       </div>
     </>
   );
