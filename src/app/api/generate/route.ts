@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import clientPromise from "../../../../lib/dbConnect";
+import clientPromise from "../../../lib/dbConnect";
 
 interface URLS {
     url: string;
@@ -41,6 +41,6 @@ export const POST = async (request: NextRequest): Promise<NextResponse<APIRespon
         message: "url generated Successfully",
         status: 200,
         success:true,
-        error:false
+         error:false
     });
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, {  useState } from "react";
 import styled from "styled-components";
 import { StyledWrapper } from "@/components/LandigPage";
 import axios from "axios";
@@ -7,7 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 const page = () => {
   const [url, seturl] = useState<string>("");
   const [shortUrl, setShortUrl] = useState<string>("");
-  const [generated, setGenerated] = useState<boolean>(false);
+  const [generated, setGenerated] = useState<string>("");
 
   const generateFunction = async () => {
     try {
@@ -15,7 +15,14 @@ const page = () => {
         url,
         shortUrl,
       });
-      console.log(response.data);
+      
+      if(response.data.status === 200){
+        seturl("")
+        setShortUrl("")
+        toast.success("URL Generated Successfully")
+      }
+     
+
     } catch (error) {
       console.log(error);
     }
